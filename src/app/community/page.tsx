@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import SEOMeta from '@/components/common/seo-meta'
 
 interface Post {
   id: string
@@ -146,7 +147,14 @@ export default function CommunityPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-yellow-50">
+    <>
+      <SEOMeta
+        title="Shire Community - Share Your Hobbit Life"
+        description="Join the Shire community to share your hobbit life experiences, recipes, and stories. Connect with fellow players and discover new adventures in Middle-earth."
+        keywords="Shire community, hobbit life, Tales of the Shire forum, Middle-earth community, gaming community"
+        url="/community"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-yellow-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-200">
         <div className="max-w-4xl mx-auto px-6 py-4">
@@ -305,5 +313,6 @@ export default function CommunityPage() {
         )}
       </div>
     </div>
+    </>
   )
 } 

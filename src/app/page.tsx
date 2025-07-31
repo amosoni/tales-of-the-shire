@@ -77,9 +77,9 @@ export default function HomePage() {
   return (
     <>
       <SEOMeta
-        title="Welcome Home, Hobbit!"
-        description="Complete guide for The Lord of the Rings: Tales of the Shire game. Discover recipes, meet characters, and decorate your hobbit hole in the Shire."
-        keywords="Tales of the Shire, Lord of the Rings, hobbit recipes, Shire characters, hobbit hole decoration"
+        title="Welcome to the Shire - Your Complete Hobbit Life Guide"
+        description="Begin your journey in The Lord of the Rings: Tales of the Shire. Discover authentic hobbit recipes, meet beloved characters, and create the perfect hobbit hole. Your complete companion for Middle-earth life."
+        keywords="Tales of the Shire, Lord of the Rings, hobbit recipes, Shire characters, hobbit hole decoration, Middle-earth guide"
         url="/"
       />
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">

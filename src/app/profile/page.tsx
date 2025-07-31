@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { User, Settings, Heart, BookOpen, Palette, LogOut, Edit, Camera, TrendingUp, Clock, Star, Crown, Trophy, Award } from 'lucide-react';
+import SEOMeta from '@/components/common/seo-meta';
 
 interface UserData {
   id: string;
@@ -140,7 +141,14 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 relative overflow-hidden">
+    <>
+      <SEOMeta
+        title="Hobbit Profile - Your Shire Journey"
+        description="Track your progress, manage favorites, and view your achievements in Tales of the Shire. Your personal hobbit life dashboard."
+        keywords="hobbit profile, Tales of the Shire progress, gaming achievements, hobbit life tracker"
+        url="/profile"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-green-200/30 to-emerald-300/30 rounded-full blur-3xl"></div>
@@ -555,5 +563,6 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
+    </>
   );
 } 
