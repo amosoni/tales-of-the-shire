@@ -1,0 +1,145 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  title     String   @default("Hobbit")
+  level     Int      @default(1)
+  joinDate  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 统计数据
+  stats UserStats?
+
+  // 收藏数据
+  favorites UserFavorites?
+
+  // 活动记录
+  activities Activity[]
+
+  // 帖子
+  posts Post[]
+  comments Comment[]
+
+  @@map("users")
+}
+
+model UserStats {
+  id                String @id @default(cuid())
+  userId            String @unique
+  recipesViewed     Int    @default(0)
+  charactersMet     Int    @default(0)
+  decorationsCrafted Int   @default(0)
+  questsCompleted   Int    @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_stats")
+}
+
+model UserFavorites {
+  id          String @id @default(cuid())
+  userId      String @unique
+  recipes     Int    @default(0)
+  npcs        Int    @default(0)
+  decorations Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_favorites")
+}
+
+model Activity {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   // "recipe_view", "character_meet", "decoration_craft", "quest_complete"
+  title       String
+  description String?
+  xpGained    Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("activities")
+}
+
+// 食谱模型
+model Recipe {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  ingredients String   // JSON string
+  instructions String  // JSON string
+  difficulty  String   @default("Easy")
+  category    String   @default("Breakfast")
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("recipes")
+}
+
+// 角色模型
+model Character {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  location    String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("characters")
+}
+
+// 装饰模型
+model Decoration {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  materials   String   // JSON string
+  difficulty  String   @default("Easy")
+  category    String   @default("Furniture")
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("decorations")
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  comments  Comment[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+} 
