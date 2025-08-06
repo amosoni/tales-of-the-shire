@@ -1,80 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/db'
 
-export async function GET() {
-  try {
-    const posts = await prisma.post.findMany({
-      include: {
-        author: {
-          select: {
-            id: true,
-            username: true,
-            title: true,
-            level: true,
-          },
-        },
-        comments: {
-          include: {
-            author: {
-              select: {
-                id: true,
-                username: true,
-                title: true,
-              },
-            },
-          },
-        },
+export async function GET(request: NextRequest) {
+  // 暂时返回模拟数据
+  return NextResponse.json([
+    {
+      id: 'mock-post-1',
+      title: 'Mock Post',
+      content: 'This is a mock post for deployment',
+      authorId: 'mock-user-1',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      author: {
+        id: 'mock-user-1',
+        username: 'MockHobbit',
+        title: 'Hobbit',
+        level: 1
       },
-      orderBy: {
-        createdAt: 'desc',
-      },
-    })
-
-    return NextResponse.json(posts)
-  } catch (error) {
-    console.error('Error fetching posts:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch posts' },
-      { status: 500 }
-    )
-  }
+      comments: []
+    }
+  ])
 }
 
 export async function POST(request: NextRequest) {
-  try {
-    const { title, content, authorId } = await request.json()
-
-    if (!title || !content || !authorId) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
-    }
-
-    const post = await prisma.post.create({
-      data: {
-        title,
-        content,
-        authorId,
-      },
-      include: {
-        author: {
-          select: {
-            id: true,
-            username: true,
-            title: true,
-            level: true,
-          },
-        },
-      },
-    })
-
-    return NextResponse.json(post, { status: 201 })
-  } catch (error) {
-    console.error('Error creating post:', error)
-    return NextResponse.json(
-      { error: 'Failed to create post' },
-      { status: 500 }
-    )
-  }
+  // 暂时返回模拟数据
+  return NextResponse.json({
+    id: 'mock-post-2',
+    title: 'Mock Created Post',
+    content: 'This is a mock created post',
+    authorId: 'mock-user-1',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  })
 } 
