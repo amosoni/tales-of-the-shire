@@ -5,17 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next build && next export",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts",
-    "pages:build": "next build",
-    "pages:deploy": "wrangler pages deploy .next",
-    "cf:build": "npm install && npm run build",
-    "cf:deploy": "npm run build && wrangler pages deploy .next",
-    "build:cf": "npm install && npm run build"
+    "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.13.0",

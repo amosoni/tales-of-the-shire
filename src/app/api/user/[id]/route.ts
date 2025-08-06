@@ -3,10 +3,11 @@ import { prisma } from '@/lib/db'
 
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = context.params.id
+    const { id } = await context.params
+    const userId = id
 
     // 获取用户信息
     const user = await prisma.user.findUnique({
@@ -37,10 +38,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = context.params.id
+    const { id } = await context.params
+    const userId = id
     const body = await request.json()
 
     const updatedUser = await prisma.user.update({

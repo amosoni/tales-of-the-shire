@@ -16,7 +16,7 @@ export interface Material {
   name: string;
   quantity: number;
   location: string;
-  rarity: 'common' | 'uncommon' | 'rare';
+  rarity: 'common' | 'uncommon' | 'rare' | 'special';
 }
 
 export const decorations: Decoration[] = [
