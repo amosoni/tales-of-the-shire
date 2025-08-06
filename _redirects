@@ -1,5 +1,0 @@
-# Cloudflare Pages Next.js路由处理
-/*    /index.html   200
-
-# API路由处理 - 使用302重定向
-/api/*    /index.html   302 

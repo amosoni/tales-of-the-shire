@@ -5,5 +5,11 @@
     "/api/*",
     "/_next/*",
     "/static/*"
+  ],
+  "routes": [
+    {
+      "src": "/*",
+      "dest": "/index.html"
+    }
   ]
 } 
