@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // 移除静态导出，使用标准Next.js构建
   trailingSlash: true,
   images: {
     unoptimized: true
   },
-  // 禁用服务器端功能，因为这是静态导出
   experimental: {
     appDir: true
   }

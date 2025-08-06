@@ -1,4 +1,4 @@
-# 处理Next.js路由 - 避免重定向问题
+# Cloudflare Pages Next.js路由处理
 /*    /index.html   200
 
 # 确保所有页面都能正确加载
@@ -6,15 +6,16 @@
 /npcs    /npcs/index.html   200
 /community    /community/index.html   200
 /profile    /profile/index.html   200
+/guide    /guide/index.html   200
+/about    /about/index.html   200
 
 # 处理尾部斜杠问题
 /recipes/    /recipes/index.html   200
 /npcs/    /npcs/index.html   200
 /community/    /community/index.html   200
 /profile/    /profile/index.html   200
+/guide/    /guide/index.html   200
+/about/    /about/index.html   200
 
-# 避免重复内容
-/recipes/index    /recipes/index.html   301
-/npcs/index    /npcs/index.html   301
-/community/index    /community/index.html   301
-/profile/index    /profile/index.html   301 
+# API路由处理
+/api/*    /404.html   404 

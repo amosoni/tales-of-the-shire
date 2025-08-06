@@ -10,7 +10,9 @@
     "lint": "next lint",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "pages:build": "next build",
+    "pages:deploy": "wrangler pages deploy .next"
   },
   "dependencies": {
     "@prisma/client": "^6.13.0",
