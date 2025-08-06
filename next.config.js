@@ -7,8 +7,8 @@ const nextConfig = {
   experimental: {
     appDir: true
   },
-  // 确保输出到.next目录
-  distDir: '.next'
+  // 确保输出到 out 目录
+  distDir: 'out'
 }
 
 module.exports = nextConfig 

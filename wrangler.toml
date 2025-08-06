@@ -8,7 +8,12 @@ command = "npm run build"
 NODE_VERSION = "18"
 NODE_ENV = "production"
 
+# 使用 .next 目录作为构建输出
 pages_build_output_dir = ".next"
 
 [site]
-bucket = ".next" 
+bucket = ".next"
+
+# 添加函数配置以支持 API 路由
+[functions]
+directory = ".next/server" 
