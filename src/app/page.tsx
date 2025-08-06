@@ -93,13 +93,13 @@ export default function HomePage() {
           </p>
           
           <div className="cta-buttons">
-            <Link href="/recipes" className="btn btn-primary">
+            <Link href="/recipes" className="btn btn-primary" title="Explore authentic hobbit recipes and cooking guides">
               Explore Recipes
             </Link>
-            <Link href="/npcs" className="btn btn-outline">
+            <Link href="/npcs" className="btn btn-outline" title="Meet beloved characters from the Shire">
               Meet the Characters
             </Link>
-            <Link href="/decorations" className="btn btn-outline">
+            <Link href="/decorations" className="btn btn-outline" title="Create the perfect hobbit hole decoration">
               Decorate Your Home
             </Link>
           </div>
@@ -171,10 +171,10 @@ export default function HomePage() {
             Help bring the community together to achieve village status in Bywater. Experience delight in Tales of the Shire: A The Lord of the Rings™ Game.
           </p>
           <div className="cta-buttons">
-            <Link href="/recipes" className="btn btn-white">
+            <Link href="/recipes" className="btn btn-white" title="Start your hobbit cooking journey">
               Start Cooking
             </Link>
-            <Link href="/npcs" className="btn btn-outline">
+            <Link href="/npcs" className="btn btn-outline" title="Discover characters from Middle-earth">
               Meet Characters
             </Link>
             <Link href="/decorations" className="btn btn-outline">

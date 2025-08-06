@@ -46,13 +46,13 @@ export function Header() {
   };
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Recipes', href: '/recipes' },
-    { name: 'Characters', href: '/npcs' },
-    { name: 'Decorations', href: '/decorations' },
-    { name: 'Search', href: '/search' },
-    { name: 'Community', href: '/community' },
-    { name: 'Guide', href: '/stats' },
+    { name: 'Home', href: '/', title: 'Welcome to Tales of the Shire Guide' },
+    { name: 'Recipes', href: '/recipes', title: 'Explore authentic hobbit recipes and cooking guides' },
+    { name: 'Characters', href: '/npcs', title: 'Meet beloved characters from the Shire' },
+    { name: 'Decorations', href: '/decorations', title: 'Create the perfect hobbit hole decoration' },
+    { name: 'Search', href: '/search', title: 'Search for recipes, characters, and decorations' },
+    { name: 'Community', href: '/community', title: 'Join the Shire community' },
+    { name: 'Guide', href: '/stats', title: 'View your progress and statistics' },
   ];
 
   return (
@@ -74,6 +74,7 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
+                  title={item.title}
                   className={`text-gray-700 hover:text-green-600 transition-colors duration-200 text-sm font-medium whitespace-nowrap px-4 py-2 ${
                     index > 0 ? 'ml-8' : ''
                   }`}
