@@ -1,0 +1,17 @@
+name = "tales-of-the-shire"
+compatibility_date = "2024-12-19"
+
+[build]
+command = "npm run build"
+output_directory = "out"
+
+[build.environment]
+NODE_VERSION = "18"
+
+[site]
+bucket = "out"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200 

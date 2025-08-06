@@ -12,10 +12,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Tales of the Shire Guide - Complete Hobbit Life Companion",
+    default: "Tales of the Shire Guide - Complete Hobbit Life & Gaming Companion",
     template: "%s | Tales of the Shire Guide"
   },
-  description: "Your complete companion for The Lord of the Rings: Tales of the Shire. Discover recipes, meet NPCs, explore decorations, and join our community. Master the art of hobbit life in Middle-earth.",
+  description: "Your ultimate companion for The Lord of the Rings: Tales of the Shire game. Discover authentic hobbit recipes, meet beloved characters, create perfect decorations, and join our community. Master the art of hobbit life in Middle-earth with our comprehensive guide.",
   keywords: [
     "Lord of the Rings",
     "Tales of the Shire", 
@@ -26,7 +26,15 @@ export const metadata: Metadata = {
     "Decoration Guide",
     "Hobbit Life",
     "Gaming Guide",
-    "Community"
+    "Community",
+    "Hobbit Recipes",
+    "Shire Characters",
+    "Hobbit Hole Decoration",
+    "Tales of the Shire Game",
+    "Hobbit Cooking",
+    "Middle-earth Guide",
+    "Shire Community",
+    "Hobbit Life Simulator"
   ],
   authors: [{ name: "Tales of the Shire Guide Team" }],
   creator: "Tales of the Shire Guide",
@@ -36,32 +44,34 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://tales-of-the-shire-guide.vercel.app'),
+  metadataBase: new URL('https://talesoftheshire.online'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://tales-of-the-shire-guide.vercel.app",
-    title: "Tales of the Shire Guide - Complete Hobbit Life Companion",
-    description: "Your complete companion for The Lord of the Rings: Tales of the Shire. Discover recipes, meet NPCs, explore decorations, and join our community.",
+    url: "https://talesoftheshire.online",
+    title: "Tales of the Shire Guide - Complete Hobbit Life & Gaming Companion",
+    description: "Your ultimate companion for The Lord of the Rings: Tales of the Shire game. Discover authentic hobbit recipes, meet beloved characters, create perfect decorations, and join our community.",
     siteName: "Tales of the Shire Guide",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Tales of the Shire Guide - Hobbit Life Companion",
+        alt: "Tales of the Shire Guide - Complete Hobbit Life & Gaming Companion",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tales of the Shire Guide - Complete Hobbit Life Companion",
-    description: "Your complete companion for The Lord of the Rings: Tales of the Shire. Discover recipes, meet NPCs, explore decorations, and join our community.",
+    title: "Tales of the Shire Guide - Complete Hobbit Life & Gaming Companion",
+    description: "Your ultimate companion for The Lord of the Rings: Tales of the Shire game. Discover authentic hobbit recipes, meet beloved characters, create perfect decorations, and join our community.",
     images: ["/og-image.png"],
     creator: "@talesoftheshireguide",
+    site: "@talesoftheshireguide",
   },
   robots: {
     index: true,
@@ -75,7 +85,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
+    google: "G-0RM4QWR5KJ",
   },
   other: {
     'language': 'en-US',
@@ -98,6 +108,16 @@ export default function RootLayout({
         <meta name="language" content="en-US" />
         <meta httpEquiv="Content-Language" content="en-US" />
         <meta name="content-language" content="en-US" />
+        <meta name="author" content="Tales of the Shire Guide Team" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="application-name" content="Tales of the Shire Guide" />
+        <meta name="apple-mobile-web-app-title" content="Shire Guide" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-TileColor" content="#16a34a" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
         
         {/* Favicon */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -116,6 +136,69 @@ export default function RootLayout({
               gtag('js', new Date());
               gtag('config', 'G-0RM4QWR5KJ');
             `,
+          }}
+        />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Tales of the Shire Guide",
+              "description": "Your ultimate companion for The Lord of the Rings: Tales of the Shire game. Discover authentic hobbit recipes, meet beloved characters, create perfect decorations, and join our community.",
+              "url": "https://talesoftheshire.online",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://talesoftheshire.online/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Tales of the Shire Guide",
+                "url": "https://talesoftheshire.online"
+              },
+              "sameAs": [
+                "https://github.com/amosoni/tales-of-the-shire"
+              ]
+            })
+          }}
+        />
+        
+        {/* Additional Structured Data for AI */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "GameGuide",
+              "name": "Tales of the Shire Complete Guide",
+              "description": "Comprehensive guide for The Lord of the Rings: Tales of the Shire game including recipes, NPCs, decorations, and community features.",
+              "gameItem": {
+                "@type": "VideoGame",
+                "name": "The Lord of the Rings: Tales of the Shire",
+                "genre": "Life Simulation",
+                "platform": "PC, Console"
+              },
+              "about": [
+                {
+                  "@type": "Thing",
+                  "name": "Hobbit Recipes",
+                  "description": "Authentic Middle-earth cooking recipes"
+                },
+                {
+                  "@type": "Thing", 
+                  "name": "Shire Characters",
+                  "description": "Detailed NPC guides and character information"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "Hobbit Hole Decoration",
+                  "description": "Decoration inspiration and crafting guides"
+                }
+              ]
+            })
           }}
         />
       </head>

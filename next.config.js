@@ -1,17 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  },
+  // 禁用服务器端功能，因为这是静态导出
   experimental: {
-    // 禁用Turbopack以避免运行时错误
-    turbo: false,
-  },
-  eslint: {
-    // 在开发时忽略ESLint错误
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    // 在开发时忽略TypeScript错误
-    ignoreBuildErrors: true,
-  },
+    appDir: true
+  }
 }
 
 module.exports = nextConfig 
