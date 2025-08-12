@@ -67,11 +67,11 @@ const features = [
 ];
 
         const stats = [
-          { label: 'Recipes', value: '42', icon: BookOpen },
-  { label: 'NPC Characters', value: '12', icon: Users },
-  { label: 'Decoration Designs', value: '10', icon: Palette },
-  { label: 'Quests', value: '10', icon: Star },
-];
+          { label: 'Recipes', value: '25', icon: BookOpen },
+          { label: 'NPC Characters', value: '22', icon: Users },
+          { label: 'Decoration Designs', value: '10', icon: Palette },
+          { label: 'Quests', value: '12', icon: Star },
+        ];
 
 export default function HomePage() {
   return (
