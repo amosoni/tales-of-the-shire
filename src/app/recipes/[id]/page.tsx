@@ -1,16 +1,11 @@
-"use client";
-
 import { notFound } from "next/navigation";
 import { recipes } from "@/data/recipes";
 import SEOMeta from "@/components/common/seo-meta";
 import Link from "next/link";
 
-type PageProps = {
-  params: { id: string };
-};
-
-export default function RecipeDetailPage({ params }: PageProps) {
-  const recipe = recipes.find((r) => r.id === params.id);
+export default async function RecipeDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const recipe = recipes.find((r) => r.id === id);
   if (!recipe) return notFound();
 
   return (

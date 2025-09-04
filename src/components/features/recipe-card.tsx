@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { RecipeCardProps } from '@/types/recipe';
 import { cn } from '@/lib/utils';
-import { Heart, Clock, Users, ChefHat, Star } from 'lucide-react';
+import { Heart, Clock, Users, ChefHat } from 'lucide-react';
 import { useState } from 'react';
 
 export function RecipeCard({ recipe, className }: RecipeCardProps) {
@@ -41,6 +41,8 @@ export function RecipeCard({ recipe, className }: RecipeCardProps) {
     }
   };
 
+  const imageSrc = recipe.imageUrl || "/images/recipes/placeholder.jpg";
+
   return (
     <div className={cn(
       "bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg hover:border-green-200 transition-all duration-300 group",
@@ -49,7 +51,7 @@ export function RecipeCard({ recipe, className }: RecipeCardProps) {
       {/* 图片头部 */}
       <div className="relative h-48 bg-gradient-to-br from-green-50 to-green-100">
         <Image
-          src={recipe.imageUrl}
+          src={imageSrc}
           alt={recipe.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -104,11 +106,11 @@ export function RecipeCard({ recipe, className }: RecipeCardProps) {
         <div className="flex items-center gap-4 mb-4 text-sm text-gray-600">
           <div className="flex items-center gap-1">
             <Users className="w-4 h-4" />
-            <span>{recipe.servings} 份</span>
+            <span>{recipe.servings ?? '-'} 份</span>
           </div>
           <div className="flex items-center gap-1">
             <Clock className="w-4 h-4" />
-            <span>{recipe.prepTime} 分钟</span>
+            <span>{recipe.cookingTime ?? '-'} </span>
           </div>
         </div>
 
@@ -122,11 +124,11 @@ export function RecipeCard({ recipe, className }: RecipeCardProps) {
             {recipe.ingredients.slice(0, 3).map((ingredient, index) => (
               <div key={index} className="flex items-center justify-between py-1.5 px-3 bg-gray-50 rounded-lg border border-gray-200">
                 <span className="text-sm font-medium text-gray-700">
-                  {typeof ingredient === 'string' ? ingredient : ingredient.name}
+                  {ingredient.name}
                 </span>
-                {typeof ingredient === 'object' && ingredient.amount && (
+                {ingredient.quantity && (
                   <span className="text-xs text-gray-500 bg-white px-2 py-1 rounded border">
-                    {ingredient.amount}
+                    {ingredient.quantity}
                   </span>
                 )}
               </div>
@@ -175,7 +177,7 @@ export function RecipeCard({ recipe, className }: RecipeCardProps) {
             <span className="font-medium"> {recipe.steps.length}</span> 步骤
           </div>
           <Link 
-            href={/recipes/}
+            href={`/recipes/${recipe.id}`}
             className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white text-sm font-semibold rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
           >
             <ChefHat className="w-4 h-4" />

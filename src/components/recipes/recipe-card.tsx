@@ -90,7 +90,7 @@ export function RecipeCard({ recipe, className }: RecipeCardProps) {
             </div>
             <div className="flex items-center gap-3">
               <Clock className="w-5 h-5 text-blue-500" />
-              <span className="font-semibold">{recipe.cookingTime || recipe.prepTime} min</span>
+              <span className="font-semibold">{recipe.cookingTime || '-'} min</span>
             </div>
             <div className="flex items-center gap-3">
               <Star className="w-5 h-5 text-amber-500" />
