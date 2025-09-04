@@ -1,119 +1,195 @@
-"use client";
+﻿"use client";
 
-import Link from 'next/link';
-import { Heart, Clock, Users, ChefHat } from 'lucide-react';
-import { Recipe } from '@/data/recipes';
-import { useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { RecipeCardProps } from "@/types/recipe";
+import { cn } from "@/lib/utils";
+import { Heart, Clock, Users, ChefHat, Star, Sparkles, Zap } from "lucide-react";
+import { useState } from "react";
 
-interface RecipeCardProps {
-  recipe: Recipe;
-  showAuthor?: boolean;
-}
-
-export function RecipeCard({ recipe, showAuthor = true }: RecipeCardProps) {
+export function RecipeCard({ recipe, className }: RecipeCardProps) {
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const handleFavorite = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsFavorited(!isFavorited);
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case "easy": return "bg-emerald-100 text-emerald-700 border-emerald-200";
+      case "medium": return "bg-amber-100 text-amber-700 border-amber-200";
+      case "hard": return "bg-rose-100 text-rose-700 border-rose-200";
+      default: return "bg-gray-100 text-gray-700 border-gray-200";
+    }
+  };
+
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "breakfast": return "bg-orange-100 text-orange-700 border-orange-200";
+      case "lunch": return "bg-blue-100 text-blue-700 border-blue-200";
+      case "dinner": return "bg-purple-100 text-purple-700 border-purple-200";
+      case "dessert": return "bg-pink-100 text-pink-700 border-pink-200";
+      case "snack": return "bg-green-100 text-green-700 border-green-200";
+      case "drink": return "bg-cyan-100 text-cyan-700 border-cyan-200";
+      default: return "bg-gray-100 text-gray-700 border-gray-200";
+    }
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-      <div className="h-32 bg-gradient-to-br from-green-100 to-yellow-100 flex items-center justify-center relative">
-        <ChefHat className="w-10 h-10 text-green-600" />
-        <button
-          onClick={handleFavorite}
-          className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
-        >
-          <Heart 
-            className={`w-5 h-5 ${isFavorited ? 'text-red-500 fill-current' : 'text-gray-400'}`} 
-          />
-        </button>
-      </div>
-      
-      <div className="p-5">
-        <h3 className="text-xl font-semibold text-gray-900 mb-3">{recipe.title}</h3>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{recipe.description}</p>
-        
-        <div className="flex flex-wrap gap-2 mb-4">
-          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-            recipe.difficulty === 'easy' ? 'bg-green-100 text-green-800' :
-            recipe.difficulty === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-            'bg-red-100 text-red-800'
-          }`}>
-            {recipe.difficulty}
-          </span>
-          <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-            {recipe.category}
-          </span>
-          <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-            {recipe.servings} servings
-          </span>
-        </div>
-
-        <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-          <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
-            {recipe.cookingTime}
-          </div>
-          {showAuthor && (
-            <div className="flex items-center gap-1">
-              <Users className="w-4 h-4" />
-              {recipe.author}
+    <Link href={`/recipes/${recipe.id}`} className="group">
+      <div className={cn(
+        "bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 overflow-hidden border border-gray-100",
+        className
+      )}>
+        <div className="relative h-64 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
+          {recipe.imageUrl ? (
+            <Image
+              src={recipe.imageUrl}
+              alt={recipe.title}
+              fill
+              className="object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-24 h-24 bg-gradient-to-br from-green-400 via-blue-400 to-purple-400 rounded-full flex items-center justify-center shadow-2xl">
+                <ChefHat className="w-12 h-12 text-white" />
+              </div>
             </div>
           )}
+          
+          <div className="absolute top-4 left-4 flex gap-2">
+            <span className={`px-4 py-2 rounded-full text-sm font-bold border backdrop-blur-sm shadow-lg ${getDifficultyColor(recipe.difficulty)}`}>
+              {recipe.difficulty.charAt(0).toUpperCase() + recipe.difficulty.slice(1)}
+            </span>
+            <span className={`px-4 py-2 rounded-full text-sm font-bold border backdrop-blur-sm shadow-lg ${getCategoryColor(recipe.category)}`}>
+              {recipe.category.charAt(0).toUpperCase() + recipe.category.slice(1)}
+            </span>
+          </div>
+
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setIsFavorited(!isFavorited);
+            }}
+            className="absolute top-4 right-4 p-3 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            <Heart className="w-6 h-6" />
+          </button>
         </div>
 
-        {/* Quick Ingredients Preview */}
-        <div className="mb-4">
-          <h4 className="text-sm font-medium text-gray-900 mb-2">Ingredients:</h4>
-          <div className="flex flex-wrap gap-1">
-            {recipe.ingredients.slice(0, 3).map((ingredient, index) => (
-              <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs">
-                {ingredient.name}
-              </span>
-            ))}
-            {recipe.ingredients.length > 3 && (
-              <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs">
-                +{recipe.ingredients.length - 3} more
+        <div className="p-8">
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition-colors line-clamp-2">
+              {recipe.title}
+            </h3>
+            <p className="text-gray-600 text-base leading-relaxed line-clamp-2">
+              {recipe.description}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-8 text-base text-gray-500 mb-8">
+            <div className="flex items-center gap-3">
+              <Users className="w-5 h-5 text-green-500" />
+              <span className="font-semibold">{recipe.servings || 4} servings</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Clock className="w-5 h-5 text-blue-500" />
+              <span className="font-semibold">{recipe.cookingTime || recipe.prepTime} min</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Star className="w-5 h-5 text-amber-500" />
+              <span className="font-semibold">{recipe.author}</span>
+            </div>
+          </div>
+
+          <div className="mb-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <h4 className="text-xl font-bold text-gray-800">Ingredients</h4>
+            </div>
+            <div className="space-y-4">
+              {recipe.ingredients.slice(0, 3).map((ingredient, index) => (
+                <div key={index} className="group/ingredient flex items-center justify-between p-5 bg-gradient-to-r from-green-50 via-emerald-50 to-green-50 rounded-2xl border-2 border-green-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 hover:border-green-300">
+                  <div className="flex items-center gap-5">
+                    <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-green-600 text-lg font-bold">{index + 1}</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-base font-bold text-gray-800 mb-1">
+                        {typeof ingredient === "string" ? ingredient : ingredient.name}
+                      </span>
+                      {typeof ingredient === "object" && ingredient.location && (
+                        <span className="text-sm text-green-600 bg-white px-3 py-1 rounded-xl border border-green-200 font-medium">
+                          {ingredient.location}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  {typeof ingredient === "object" && ingredient.quantity && (
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg font-bold text-green-700 bg-white px-5 py-3 rounded-2xl border-2 border-green-300 shadow-lg">
+                        {ingredient.quantity}
+                      </span>
+                      {ingredient.rarity && (
+                        <span className="text-sm px-4 py-2 rounded-full font-bold">
+                          {ingredient.rarity}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+              {recipe.ingredients.length > 3 && (
+                <div className="text-center py-4">
+                  <span className="inline-flex items-center gap-3 text-base text-green-600 bg-green-100 px-6 py-3 rounded-full border-2 border-green-200 font-bold hover:bg-green-200 transition-colors">
+                    <span>+{recipe.ingredients.length - 3} more ingredients</span>
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {recipe.effects && recipe.effects.length > 0 && (
+            <div className="mb-8">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <Zap className="w-5 h-5 text-white" />
+                </div>
+                <h4 className="text-xl font-bold text-gray-800">Effects</h4>
+              </div>
+              <div className="space-y-4">
+                {recipe.effects.slice(0, 2).map((effect, index) => (
+                  <div key={index} className="group/effect flex items-center gap-5 p-5 bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 rounded-2xl border-2 border-blue-200 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 hover:border-blue-300">
+                    <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-blue-600 text-lg font-bold">{index + 1}</span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <span className="text-3xl font-bold text-blue-600">+</span>
+                      <span className="text-base font-bold text-blue-800">
+                        {effect}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+                {recipe.effects.length > 2 && (
+                  <div className="text-center py-4">
+                    <span className="inline-flex items-center gap-3 text-base text-blue-600 bg-blue-100 px-6 py-3 rounded-full border-2 border-blue-200 font-bold hover:bg-blue-200 transition-colors">
+                      <span>+{recipe.effects.length - 2} more effects</span>
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="flex items-center justify-between text-base text-gray-500 pt-6 border-t-2 border-gray-100">
+            <span className="font-semibold">{recipe.ingredients.length} ingredients • {recipe.steps.length} steps</span>
+            {recipe.unlockCondition && (
+              <span className="text-sm text-amber-600 bg-amber-50 px-4 py-2 rounded-full border-2 border-amber-200 font-bold">
+                {recipe.unlockCondition}
               </span>
             )}
           </div>
         </div>
-
-        {/* Quick Effects Preview */}
-        {recipe.effects && recipe.effects.length > 0 && (
-          <div className="mb-4">
-            <h4 className="text-sm font-medium text-gray-900 mb-2">Effects:</h4>
-            <div className="flex flex-wrap gap-1">
-              {recipe.effects.slice(0, 2).map((effect, index) => (
-                <span key={index} className="px-2 py-1 bg-green-50 text-green-700 rounded-full text-xs">
-                  {effect}
-                </span>
-              ))}
-              {recipe.effects.length > 2 && (
-                <span className="px-2 py-1 bg-green-50 text-green-700 rounded-full text-xs">
-                  +{recipe.effects.length - 2} more
-                </span>
-              )}
-            </div>
-          </div>
-        )}
-
-        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-          <div className="text-sm text-gray-500">
-            {recipe.ingredients.length} ingredients • {recipe.steps.length} steps
-          </div>
-          <Link 
-            href={`/recipes/${recipe.id}`}
-            className="inline-block px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium shadow-md hover:shadow-lg no-underline"
-            style={{display: 'inline-block', backgroundColor: '#22c55e', color: 'white', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none'}}
-          >
-            View Recipe →
-          </Link>
-        </div>
       </div>
-    </div>
+    </Link>
   );
-} 
+}

@@ -3,6 +3,7 @@ import { ArrowLeft, MapPin, Heart, Gift, MessageCircle, Users, Star } from 'luci
 import { npcs } from '@/data/npcs';
 import FavoriteButton from '@/components/common/favorite-button';
 import CommentSection from '@/components/common/comment-section';
+import NpcAvatar from '@/components/npcs/NpcAvatar';
 
 interface NPCPageProps {
   params: Promise<{
@@ -43,10 +44,15 @@ export default async function NPCPage({ params }: NPCPageProps) {
           Back to Characters
         </Link>
         
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">{npc.name}</h1>
-        <p className="text-gray-600 text-lg mb-6">{npc.description}</p>
-        
-        <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+        <div className="flex items-center gap-6">
+          <NpcAvatar id={npc.id} name={npc.name} className="w-20 h-20" />
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">{npc.name}</h1>
+            <p className="text-gray-600 text-lg">{npc.description}</p>
+          </div>
+        </div>
+          
+        <div className="mt-4 flex flex-wrap gap-4 text-sm text-gray-500">
           <div className="flex items-center gap-1">
             <MapPin className="w-4 h-4" />
             {npc.location}

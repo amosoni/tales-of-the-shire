@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { Search, Users, Heart, Gift, MessageCircle } from 'lucide-react';
+import { Search, Gift, MessageCircle } from 'lucide-react';
 import { npcs } from '@/data/npcs';
+import NpcAvatar from '@/components/npcs/NpcAvatar';
 
 const locations = ['All', 'Hobbiton', 'Buckland', 'Tuckborough', 'Bywater', 'Bree', 'Old Forest', 'Bamfurlong Farm'];
 const relationships = ['All', 'Friendly', 'Very Friendly', 'Respectful', 'Courting'];
@@ -58,7 +59,7 @@ export default function NPCsPage() {
             className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
           >
             <div className="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-              <Users className="w-12 h-12 text-blue-600" />
+              <NpcAvatar id={npc.id} name={npc.name} className="w-28 h-28" />
             </div>
             <div className="p-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">{npc.name}</h3>

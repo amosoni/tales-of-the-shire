@@ -59,13 +59,13 @@ export function Header() {
     <>
       <header className="bg-white shadow-sm border-b border-green-200">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-28">
+          <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3 flex-shrink-0">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-3xl">🍃</span>
+              <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-md">
+                <span className="text-white font-bold text-2xl">🍃</span>
               </div>
-              <span className="text-6xl font-bold text-green-800">Tales of the Shire</span>
+              <span className="text-3xl font-bold text-green-800">Tales of the Shire</span>
             </Link>
 
             {/* Desktop Navigation */}
